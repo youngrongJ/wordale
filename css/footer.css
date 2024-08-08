@@ -1,0 +1,28 @@
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 40px;
+  background-color: lightgray;
+  margin: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.keyboard-column.wide {
+  width: 50px;
+  height: 40px;
+  font-size: small;
+}
+
+.back-space-icon img {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,32 @@
+.icons img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 3px;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  border-bottom: 2px solid gray;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.detail {
+  border-radius: 15px;
+  border: 1px solid black;
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-weight: bolder;
+}

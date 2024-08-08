@@ -1,0 +1,28 @@
+.board-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-column {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(128, 128, 128, 0.7);
+  margin: 3px;
+}
+
+main {
+  margin-bottom: 30px;
+}
+
+#timer {
+  font-size: larger;
+  font-weight: bolder;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+}
