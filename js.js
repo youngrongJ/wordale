@@ -4,29 +4,58 @@ let attempts = 0;
 let index = 0;
 let timer;
 
-//1.
 function appStart() {
-  const displayGameover = () => {
+  // 게임 승리 메시지
+  const winDisplayGameover = () => {
     const div = document.createElement("div");
-    div.innerText = "게임이 종료됐습니다.";
+    div.innerText = "정답입니다!";
     div.style =
       "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px;";
     document.body.appendChild(div);
   };
 
-  const gameover = () => {
+  // 게임 패배 메시지
+  const loseDisplayGameover = () => {
+    const div = document.createElement("div");
+    div.innerText = "다시 시도해주세요!";
+    div.style =
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px;";
+    document.body.appendChild(div);
+  };
+
+  // 게임 승리 처리
+  const wingameover = () => {
     window.removeEventListener("keydown", handleKeydown);
-    displayGameover();
+    winDisplayGameover();
+    clearInterval(timer);
+  };
+
+  // 게임 패배 처리
+  const losegameover = () => {
+    window.removeEventListener("keydown", handleKeydown);
+    loseDisplayGameover();
     clearInterval(timer);
   };
 
   const nextLine = () => {
-    if (attempts === 6) return gameover();
+    // 시도 횟수가 6번인 경우 패배 처리
+    if (attempts >= 5) {
+      losegameover();
+      return;
+    }
     attempts += 1;
     index = 0;
   };
 
-  //3.
+  const updateKeyboard = (key, color) => {
+    const keyElement = document.querySelector(
+      `.keyboard-column[data-key='${key}']`
+    );
+    if (keyElement) {
+      keyElement.style.backgroundColor = color;
+    }
+  };
+
   const handleEnterKey = () => {
     let 맞은_갯수 = 0;
 
@@ -37,16 +66,26 @@ function appStart() {
 
       const 입력한_글자 = block.innerText;
       const 정답_글자 = 정답[i];
+
       if (입력한_글자 === 정답_글자) {
         맞은_갯수 += 1;
         block.style.background = "#6AAA64";
-      } else if (정답.includes(입력한_글자)) block.style.background = "#C9B458";
-      else block.style.background = "#787C7E";
+        updateKeyboard(입력한_글자, "#6AAA64");
+      } else if (정답.includes(입력한_글자)) {
+        block.style.background = "#C9B458";
+        updateKeyboard(입력한_글자, "#C9B458");
+      } else {
+        block.style.background = "#787C7E";
+        updateKeyboard(입력한_글자, "#000000"); // 틀린 글자는 블랙으로 표시
+      }
       block.style.color = "white";
     }
 
-    if (맞은_갯수 === 5) gameover();
-    else nextLine();
+    if (맞은_갯수 === 5) {
+      wingameover();
+    } else {
+      nextLine();
+    }
   };
 
   const handleBackspace = () => {
@@ -59,7 +98,6 @@ function appStart() {
     if (index !== 0) index -= 1;
   };
 
-  //2.
   const handleKeydown = (event) => {
     const key = event.key.toUpperCase();
     const keyCode = event.keyCode;
