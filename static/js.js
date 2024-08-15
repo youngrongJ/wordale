@@ -67,6 +67,10 @@ function appStart() {
     const 정답 = 정답_객체.answer;
     console.log(정답); //TRAIN
 
+    //만약 Python에서 return을 객체가아닌 문자열을 그대로 받도록
+    //return answer이라고 바꾼다면
+    //자바에서도 const 정답 = await 응답.json() 으로 끝낼 수 있음 .
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-column[data-index='${attempts}${i}']`
