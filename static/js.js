@@ -1,4 +1,4 @@
-const 정답 = "JINNY";
+// const 정답 = "JINNY"; 서버에서 정답을 불러올꺼임
 
 let attempts = 0;
 let index = 0;
@@ -56,8 +56,16 @@ function appStart() {
     }
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let 맞은_갯수 = 0;
+
+    //서버에서 정답 불러오기
+    const 응답 = await fetch("/answer");
+    console.log(응답);
+    const 정답_객체 = await 응답.json();
+    console.log(정답_객체); //{answer: 'TRAIN'}
+    const 정답 = 정답_객체.answer;
+    console.log(정답); //TRAIN
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
